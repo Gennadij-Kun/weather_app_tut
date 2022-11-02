@@ -1,9 +1,10 @@
 .searchBar {
   padding: 0.5rem 0.5rem 1.5rem;
-  &__form {
+
+  .searchBar__form {
     display: flex;
     justify-content: space-between;
-    border: 2px solid $border-color;
+    border: 2px solid $bordercolor;
     border-radius: 500px;
 
     .searchBar__text {
@@ -16,10 +17,10 @@
       font-size: 1.25rem;
       padding: 0.75rem 0 0.75rem 0.75rem;
       outline: none;
+    }
 
-      &::placeholder {
-        color: $fadecolor;
-      }
+    .searchBar__text::placeholder {
+      color: $fadecolor;
     }
 
     .searchBar__button {
@@ -38,8 +39,8 @@
     }
   }
 
-  &__form:focus-within,
-  &__form:hover {
+  .searchBar__form:focus-within,
+  .searchBar__form:hover {
     box-shadow: 4px 2px 5px $text-shadow-color;
   }
 }

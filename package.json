@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gennadij-Kun/weather_app_tut.git"
+    "url": "git+https://github.com/gitdagray/weather_app_tut.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Gennadij-Kun/weather_app_tut/issues"
+    "url": "https://github.com/gitdagray/weather_app_tut/issues"
   },
-  "homepage": "https://github.com/Gennadij-Kun/weather_app_tut#readme",
+  "homepage": "https://github.com/gitdagray/weather_app_tut#readme",
   "dependencies": {
-    "node-fetch": "^3.2.10"
+    "node-fetch": "^2.6.1"
   }
 }
