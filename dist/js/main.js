@@ -29,7 +29,7 @@ const initApp = () => {
   const refreshButton = document.getElementById("refresh");
   refreshButton.addEventListener("click", refreshWeather);
   const locationEntry = document.getElementById("searchBar__form");
-  locationEntry.addEventListener("submit", submitNewlocation);
+  locationEntry.addEventListener("submit", submitNewLocation);
   // set up
   setPlaceholderText();
   // load weather
@@ -129,7 +129,7 @@ const refreshWeather = () => {
   updateDataAndDisplay(currentLoc);
 };
 
-const submitNewlocation = async (event) => {
+const submitNewLocation = async (event) => {
   event.preventDefault();
   const text = document.getElementById("searchBar__text").value;
   const entryText = cleanText(text);
