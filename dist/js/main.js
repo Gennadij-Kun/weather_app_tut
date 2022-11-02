@@ -3,7 +3,7 @@ import {
   getHomeLocation,
   getWeatherFromCoords,
   getCoordsFromApi,
-  cleanText,
+  cleanText
 } from "./dataFunctions.js";
 import {
   setPlaceholderText,
@@ -11,9 +11,9 @@ import {
   displayError,
   displayApiError,
   updateScreenReaderConfirmation,
-  updateDisplay,
+  updateDisplay
 } from "./domFunctions.js";
-import CurrentLocation from "./currentLocation.js";
+import CurrentLocation from "./CurrentLocation.js";
 const currentLoc = new CurrentLocation();
 
 const initApp = () => {
@@ -39,19 +39,16 @@ const initApp = () => {
 document.addEventListener("DOMContentLoaded", initApp);
 
 const getGeoWeather = (event) => {
-  if (event) {
-    if (event.type === "click") {
-      // add spiner
-      const mapIcon = document.querySelector(".fa-map-marker-alt");
-      addSpinner(mapIcon);
-    }
+  if (event && event.type === "click") {
+    const mapIcon = document.querySelector(".fa-map-marker-alt");
+    addSpinner(mapIcon);
   }
-  if (!navigator.geolocation) geoError();
+  if (!navigator.geolocation) return geoError();
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
 };
 
 const geoError = (errObj) => {
-  const errMsg = errObj.message ? errObj.message : "Geolacation not supported";
+  const errMsg = errObj ? errObj.message : "Geolocation not supported";
   displayError(errMsg, errMsg);
 };
 
@@ -59,12 +56,9 @@ const geoSuccess = (position) => {
   const myCoordsObj = {
     lat: position.coords.latitude,
     lon: position.coords.longitude,
-    name: `Lat:${position.coords.latitude} Long:${position.coords.longitude}`,
+    name: `Lat:${position.coords.latitude} Long:${position.coords.longitude}`
   };
-  // set location object
   setLocationObject(currentLoc, myCoordsObj);
-  // console.log(currentLoc);
-  // update data and display
   updateDataAndDisplay(currentLoc);
 };
 
@@ -74,7 +68,7 @@ const loadWeather = (event) => {
   if (!savedLocation && event.type === "click") {
     displayError(
       "No Home Location Saved.",
-      "Sorry. Please save your location first."
+      "Sorry. Please save your home location first."
     );
   } else if (savedLocation && !event) {
     displayHomeLocationWeather(savedLocation);
@@ -92,7 +86,7 @@ const displayHomeLocationWeather = (home) => {
       lat: locationJson.lat,
       lon: locationJson.lon,
       name: locationJson.name,
-      unit: locationJson.unit,
+      unit: locationJson.unit
     };
     setLocationObject(currentLoc, myCoordsObj);
     updateDataAndDisplay(currentLoc);
@@ -107,7 +101,7 @@ const saveLocation = () => {
       name: currentLoc.getName(),
       lat: currentLoc.getLat(),
       lon: currentLoc.getLon(),
-      unit: currentLoc.getUnit(),
+      unit: currentLoc.getUnit()
     };
     localStorage.setItem("defaultWeatherLocation", JSON.stringify(location));
     updateScreenReaderConfirmation(
@@ -139,14 +133,12 @@ const submitNewLocation = async (event) => {
   const coordsData = await getCoordsFromApi(entryText, currentLoc.getUnit());
   if (coordsData) {
     if (coordsData.cod === 200) {
-      // work with api data
-      // success
       const myCoordsObj = {
         lat: coordsData.coord.lat,
         lon: coordsData.coord.lon,
         name: coordsData.sys.country
           ? `${coordsData.name}, ${coordsData.sys.country}`
-          : coordsData.name,
+          : coordsData.name
       };
       setLocationObject(currentLoc, myCoordsObj);
       updateDataAndDisplay(currentLoc);

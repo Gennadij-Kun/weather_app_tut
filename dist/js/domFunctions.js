@@ -77,7 +77,6 @@ export const updateDisplay = (weatherJson, locationObj) => {
     locationObj.getUnit()
   );
   displayCurrentConditions(ccArray);
-  // six day forecast
   displaySixDayForecast(weatherJson);
   setFocusOnSearch();
   fadeDisplay();
@@ -85,11 +84,10 @@ export const updateDisplay = (weatherJson, locationObj) => {
 
 const fadeDisplay = () => {
   const cc = document.getElementById("currentForecast");
-  cc.classList.toggle("zero-viz");
+  cc.classList.toggle("zero-vis");
   cc.classList.toggle("fade-in");
-
   const sixDay = document.getElementById("dailyForecast");
-  sixDay.classList.toggle("zero-viz");
+  sixDay.classList.toggle("zero-vis");
   sixDay.classList.toggle("fade-in");
 };
 
@@ -118,7 +116,7 @@ const getWeatherClass = (icon) => {
     10: "rain",
     11: "rain",
     13: "snow",
-    50: "fog",
+    50: "fog"
   };
   let weatherClass;
   if (weatherLookup[firstTwoChars]) {
@@ -141,7 +139,7 @@ const setBGImage = (weatherClass) => {
 const buildScreenReaderWeather = (weatherJson, locationObj) => {
   const location = locationObj.getName();
   const unit = locationObj.getUnit();
-  const tempUnit = unit === "imperial" ? "F" : "C";
+  const tempUnit = unit === "imperial" ? "Fahrenheit" : "Celsius";
   return `${weatherJson.current.weather[0].description} and ${Math.round(
     Number(weatherJson.current.temp)
   )}°${tempUnit} in ${location}`;
@@ -212,7 +210,7 @@ const createElem = (elemType, divClassName, divText, unit) => {
   }
   if (divClassName === "temp") {
     const unitDiv = document.createElement("div");
-    unitDiv.classList.add("unit");
+    unitDiv.className = "unit";
     unitDiv.textContent = unit;
     div.appendChild(unitDiv);
   }
@@ -268,6 +266,7 @@ const translateIconToFontAwesome = (icon) => {
   }
   return i;
 };
+
 const displayCurrentConditions = (currentConditionsArray) => {
   const ccContainer = document.getElementById("currentForecast__conditions");
   currentConditionsArray.forEach((cc) => {
